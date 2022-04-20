@@ -30,17 +30,22 @@ const routes = [
   {
     path: '/search',
     name: 'search',
-    component: () => import(/* webpackChunkName: "counter" */ '../views/SearchPokemonView.vue'),
+    component: () => import(/* webpackChunkName: "searc" */ '../views/SearchPokemonView.vue'),
   },
   {
     path: '/pokemon/:id',
     name: 'pokemon-id',
-    component: () => import(/* webpackChunkName: "counter" */ '../views/PokemonView.vue'),
+    component: () => import(/* webpackChunkName: "pokemonid" */ '../views/PokemonView.vue'),
     // props: route=>{
     //   return{
     //     initValue:Number.parseInt(route.query.i??10)
     //   }
     // }
+  },
+  {
+    path: '/todo',
+    name: 'todo',
+    component: () => import(/* webpackChunkName: "todo" */ '../views/TodoVuexView.vue'),
   },
   { path: '/:pathMatch(.*)', 
     name: 'notfound', 
