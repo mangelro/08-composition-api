@@ -1,6 +1,6 @@
 <template>
 	<h1>Lista de tareas de Thanos</h1>
-		<h4>Pendientes: {{ pending.length }}</h4>
+	<h4>Pendientes: {{ pending.length }}</h4>
 	<hr />
 	<button
 		:class="{ active: currentTap === 'all' }"
@@ -10,7 +10,8 @@
 	</button>
 	<button
 		:class="{ active: currentTap === 'pending' }"
-		@click="currentTap = 'pending'">
+		@click="currentTap = 'pending'"
+	>
 		Pendientes
 	</button>
 	<button
@@ -30,20 +31,61 @@
 			</li>
 		</ul>
 	</div>
+
+	<button @click="openModal">Crear TODO</button>
+
+	<the-modal v-if="isOpen" @on:close="closeModal">
+		<template #header><h2>Crear nuevo TODO</h2></template>
+		<template #body>
+			<form @submit.prevent="onSubmit">
+				<input
+					type="text"
+					v-model="txtTodo"
+					placeholder="Descripción del TODO"/>
+			</form>
+		</template>
+		<template #footer><button @click="onSubmit">Guardar</button></template>
+	</the-modal>
 </template>
 
 <script>
-	import  useTodos  from '@/composables/useTodos'
+	import { ref } from 'vue'
+	import useTodos from '@/composables/useTodos'
+	import TheModal from '@/components/TheModal.vue'
 
 	export default {
+		components: { TheModal },
 		setup() {
-			const { currentTap, getTodosByTab, pending, toggleTodo } = useTodos()
-
-			return {
+			const {
 				currentTap,
 				getTodosByTab,
-        pending,
+				pending,
 				toggleTodo,
+				createTodo,
+			} = useTodos()
+
+			const txtTodo = ref('')
+			const isOpen = ref(false)
+			
+			const openModal= () => isOpen.value = true
+			
+			const closeModal= () => isOpen.value = false
+
+
+			return {
+				isOpen,
+				txtTodo,
+				currentTap,
+				getTodosByTab,
+				pending,
+				toggleTodo,
+				openModal,
+				closeModal,
+				onSubmit: () => {
+					createTodo(txtTodo.value)
+					txtTodo.value=''
+					closeModal()
+				},
 			}
 		},
 	}

@@ -5,7 +5,8 @@
     <router-link :to="{name:'counter',query:{i:1023}}">Counter</router-link> |
     <router-link :to="{name:'users'}">Users</router-link> |
     <router-link :to="{name:'search'}">Search Pokemon</router-link> |
-    <router-link :to="{name:'todo'}">Todo</router-link>
+    <router-link :to="{name:'todo'}">Todo</router-link> |
+    <router-link :to="{name:'slots'}">Slots</router-link>
   </nav>
 
 

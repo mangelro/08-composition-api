@@ -14,9 +14,10 @@ const useTodos = ()=>{
 	  pending: computed(() => store.getters['pendingTodos']),
 	  completed: computed(() => store.getters['completedTodos']),
 	  getTodosByTab: computed(()=> store.getters['getTodosByTab'](currentTap.value)),
-
+	  
 	  //methods
 	  toggleTodo: (id) => store.commit('toggleTodo',id), //mutation
+	  createTodo:(txt)=> store.commit('createTodo',txt), //mutation
 	}
 
 }
